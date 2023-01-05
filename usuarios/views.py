@@ -11,7 +11,7 @@ from django.contrib import messages
 @has_permission_decorator('cadastrar_funcionario')
 def cadastrar_funcionario(request):
     if request.method == 'GET':
-        funcionarios = Users.objects.filter(cargo="F")
+        funcionarios = Users.objects.filter(cargo="Funcionario")
         return render(request, 'cadastrar_funcionario.html', {'funcionarios': funcionarios})
       
     if request.method == 'POST':
@@ -19,15 +19,15 @@ def cadastrar_funcionario(request):
         cpf_usuario = request.POST.get('cpf_usuario')
         data_de_nascimento_usuario = request.POST.get('data_de_nascimento_usuario')
         endereco_usuario = request.POST.get('endereco_usuario')
-        email_usuario = request.POST.get('email_usuario')
+        email = request.POST.get('email')
         username = request.POST.get('username')
         senha = request.POST.get('senha')
 
         
         try:
-            user = Users.objects.create_user(username=username, password=senha, cargo="F", first_name=nome_completo_usuario, email_usuario=email_usuario, cpf_usuario=cpf_usuario, endereco_usuario=endereco_usuario)
+            user = Users.objects.create_user(username=username, password=senha, cargo="Funcionario", first_name=nome_completo_usuario, email=email, cpf_usuario=cpf_usuario, endereco_usuario=endereco_usuario)
             usuario = Usuarios(nome_completo_usuario=nome_completo_usuario, cpf_usuario=cpf_usuario, 
-            data_de_nascimento_usuario=data_de_nascimento_usuario, endereco_usuario=endereco_usuario, email_usuario=email_usuario)
+            data_de_nascimento_usuario=data_de_nascimento_usuario, endereco_usuario=endereco_usuario, email=email)
             user.save()
             usuario.save()
         except:
@@ -47,7 +47,7 @@ def cadastrar_funcionario(request):
 @has_permission_decorator('cadastrar_professor')
 def cadastrar_professor(request):
     if request.method == 'GET':
-        professores = Users.objects.filter(cargo="P")
+        professores = Users.objects.filter(cargo="Professor")
         return render(request, 'cadastrar_professor.html', {'professores': professores})
         
     if request.method == 'POST':
@@ -55,7 +55,7 @@ def cadastrar_professor(request):
         cpf_usuario = request.POST.get('cpf_usuario')
         data_de_nascimento_usuario = request.POST.get('data_de_nascimento_usuario')
         endereco_usuario = request.POST.get('endereco_usuario')
-        email_usuario = request.POST.get('email_usuario')
+        email = request.POST.get('email')
         username = request.POST.get('username')
         senha = request.POST.get('senha')
      
@@ -67,9 +67,9 @@ def cadastrar_professor(request):
             return HttpResponse('Esse username já existe!')
 
         try:
-            user = Users.objects.create_user(username=username, password=senha, cargo="P", first_name=nome_completo_usuario, email_usuario=email_usuario, cpf_usuario=cpf_usuario, endereco_usuario=endereco_usuario)
+            user = Users.objects.create_user(username=username, password=senha, cargo="Professor", first_name=nome_completo_usuario, email=email, cpf_usuario=cpf_usuario, endereco_usuario=endereco_usuario)
             usuario = Usuarios(nome_completo_usuario=nome_completo_usuario, cpf_usuario=cpf_usuario, 
-            data_de_nascimento_usuario=data_de_nascimento_usuario, endereco_usuario=endereco_usuario, email_usuario=email_usuario)
+            data_de_nascimento_usuario=data_de_nascimento_usuario, endereco_usuario=endereco_usuario, email=email)
             user.save()
             usuario.save()
         except:
@@ -102,12 +102,12 @@ def logout(request):
 
 @has_permission_decorator('listagem_funcionario')
 def listagem_funcionario(request):
-    funcionarios = Users.objects.filter(cargo="F").order_by('cpf_usuario')
+    funcionarios = Users.objects.filter(cargo="Funcionario").order_by('first_name')
     return render(request, 'listar_funcionario.html', {'funcionarios':funcionarios})
 
 @has_permission_decorator('listagem_professor')
 def listagem_professor(request):
-    professores = Users.objects.filter(cargo="P").order_by('cpf_usuario')
+    professores = Users.objects.filter(cargo="Professor").order_by('first_name')
     return render(request, 'listar_professor.html', {'professores':professores})
 
 @has_permission_decorator('cadastrar_funcionario')
@@ -115,11 +115,11 @@ def excluir_usuario(request, id):
     funcionario = get_object_or_404(Users, id=id)
     funcionario.delete()
     messages.add_message(request, messages.SUCCESS, 'O funcionário foi excluido!')
-    return redirect(reverse('cadastrar_funcionario'))
+    return redirect('listagem_funcionarios')
 
 @has_permission_decorator('cadastrar_professor')
 def excluir_usuario(request, id):
     funcionario = get_object_or_404(Users, id=id)
     funcionario.delete()
     messages.add_message(request, messages.SUCCESS, 'O professor foi excluido!')
-    return redirect(reverse('cadastrar_professor'))
+    return redirect('listagem_professores')

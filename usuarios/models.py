@@ -3,15 +3,14 @@ from django.contrib.auth.models import AbstractUser
 
 class Users(AbstractUser):
     cargos = (
-        ('G', 'Gerente'),
-        ('F', 'Funcionario'),
-        ('P', 'Professor')
+        ('Gerente', 'Gerente'),
+        ('Funcionario', 'Funcionario'),
+        ('Professor', 'Professor')
     )
-    cargo = models.CharField(max_length=1, choices=cargos)
+    cargo = models.CharField(max_length=100, choices=cargos)
 
     cpf_usuario = models.CharField(max_length=11, unique=True)
     endereco_usuario = models.CharField(max_length=200)
-    email_usuario = models.CharField(max_length=256, unique=True)
 
 
 class Usuarios(models.Model):
@@ -19,7 +18,7 @@ class Usuarios(models.Model):
     cpf_usuario = models.CharField(max_length=11, unique=True)
     data_de_nascimento_usuario = models.DateField()
     endereco_usuario = models.CharField(max_length=200)
-    email_usuario = models.CharField(max_length=256, unique=True)
+    email = models.EmailField()
 
     def __str__(self) -> str:
         return self.nome_completo_usuario
