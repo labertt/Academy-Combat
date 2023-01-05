@@ -1,20 +1,29 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
 
-{% block 'body' %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Academy Combat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'usuarios/css/login.css' %}">
+    <link rel="shortcut icon" href="{% static 'usuarios/img/iconAcademyCombat.png' %} " type="image/x-icon">
 
-    <div class="container">
+</head>
+
+<body>
+    <div class="login-dark">
         <form action="{% url 'login' %}" method="POST">{% csrf_token %}
-            <br>
-            <label>Username</label>
-            <input type="username" placeholder="Digite seu username" name="username" class="form-control">
-            <br>
-            <label>Senha</label>
-            <input type="password" placeholder="Digite sua senha" name="senha" class="form-control">
-            <br>
-            <input type="submit" class="btn btn-success">
-
-        </form>
-
+            <h2 class="sr-only">Login Academy Combaty</h2>
+            <div class="illustration"><img src="{% static 'usuarios/img/fotoTelaLogin.png' %}" alt="logo" width="200" height="200"></div>
+            <div class="form-group"><input type="username" placeholder="Username" name="username" class="form-control"></div>
+            <div class="form-group"><input type="password" placeholder="Password" name="senha" class="form-control"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a href="#" class="forgot">Forgot your email or password?</a></form>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
 
-{% endblock %}
+</html>

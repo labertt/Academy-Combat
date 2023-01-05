@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block 'body' %}
+
+    <div class="container">
+        <div class="espaco">
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome Completo</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    {% for professor in professores %}
+                    
+                    <tr>
+                        <th scope="row">{{professor.first_name}}</th>
+                        <td>{{professor.cpf_usuario}}</td>
+                        <td>{{professor.endereco_usuario}}</td>
+                        <td>{{professor.email_usuario}}</td>
+                        <td>{{professor.username}}</td>
+                        <td><a href="{% url 'excluir_usuario' professor.id %}" class="btn btn-danger">Excluir</a></td>
+                    </tr>
+                    
+                    {% endfor %}
+    
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

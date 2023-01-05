@@ -10,6 +10,7 @@ class Users(AbstractUser):
     cargo = models.CharField(max_length=1, choices=cargos)
 
     cpf_usuario = models.CharField(max_length=11, unique=True)
+    endereco_usuario = models.CharField(max_length=200)
     email_usuario = models.CharField(max_length=256, unique=True)
 
 

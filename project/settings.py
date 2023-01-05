@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'usuarios',
     'rolepermissions',
     'aluno',
+    'main',
 ]
 
 MIDDLEWARE = [

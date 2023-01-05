@@ -4,6 +4,8 @@ class Gerente(AbstractUserRole):
     available_permissions = {
         'cadastrar_funcionario': True,
         'cadastrar_professor': True,
+        'listagem_funcionario': True,
+        'listagem_professor': True,
     }
 
 class Funcionario(AbstractUserRole):

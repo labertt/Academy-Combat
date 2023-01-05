@@ -13,7 +13,7 @@ def cadastrar_funcionario(request):
     if request.method == 'GET':
         funcionarios = Users.objects.filter(cargo="F")
         return render(request, 'cadastrar_funcionario.html', {'funcionarios': funcionarios})
-        
+      
     if request.method == 'POST':
         nome_completo_usuario = request.POST.get('nome_completo_usuario')
         cpf_usuario = request.POST.get('cpf_usuario')
@@ -25,7 +25,7 @@ def cadastrar_funcionario(request):
 
         
         try:
-            user = Users.objects.create_user(username=username, password=senha, cargo="F", first_name=nome_completo_usuario, email_usuario=email_usuario, cpf_usuario=cpf_usuario)
+            user = Users.objects.create_user(username=username, password=senha, cargo="F", first_name=nome_completo_usuario, email_usuario=email_usuario, cpf_usuario=cpf_usuario, endereco_usuario=endereco_usuario)
             usuario = Usuarios(nome_completo_usuario=nome_completo_usuario, cpf_usuario=cpf_usuario, 
             data_de_nascimento_usuario=data_de_nascimento_usuario, endereco_usuario=endereco_usuario, email_usuario=email_usuario)
             user.save()
@@ -42,7 +42,7 @@ def cadastrar_funcionario(request):
         
 
         # TODO: Redirecionar com uma mensagem
-        return HttpResponse('Conta Criada')
+        return redirect('listagem_funcionarios')
 
 @has_permission_decorator('cadastrar_professor')
 def cadastrar_professor(request):
@@ -67,7 +67,7 @@ def cadastrar_professor(request):
             return HttpResponse('Esse username já existe!')
 
         try:
-            user = Users.objects.create_user(username=username, password=senha, cargo="P", first_name=nome_completo_usuario, email_usuario=email_usuario, cpf_usuario=cpf_usuario)
+            user = Users.objects.create_user(username=username, password=senha, cargo="P", first_name=nome_completo_usuario, email_usuario=email_usuario, cpf_usuario=cpf_usuario, endereco_usuario=endereco_usuario)
             usuario = Usuarios(nome_completo_usuario=nome_completo_usuario, cpf_usuario=cpf_usuario, 
             data_de_nascimento_usuario=data_de_nascimento_usuario, endereco_usuario=endereco_usuario, email_usuario=email_usuario)
             user.save()
@@ -77,7 +77,7 @@ def cadastrar_professor(request):
         
 
         # TODO: Redirecionar com uma mensagem
-        return HttpResponse('Conta Criada')
+        return redirect('listagem_professores')
 
 def login(request):
     if request.method == "GET":
@@ -94,11 +94,21 @@ def login(request):
             return HttpResponse('Usuário Inválido')
 
         auth.login(request, user)
-        return HttpResponse('Usuário logado com sucesso')
+        return redirect('home')
 
 def logout(request):
     request.session.flush()
     return redirect(reverse(login))
+
+@has_permission_decorator('listagem_funcionario')
+def listagem_funcionario(request):
+    funcionarios = Users.objects.filter(cargo="F").order_by('cpf_usuario')
+    return render(request, 'listar_funcionario.html', {'funcionarios':funcionarios})
+
+@has_permission_decorator('listagem_professor')
+def listagem_professor(request):
+    professores = Users.objects.filter(cargo="P").order_by('cpf_usuario')
+    return render(request, 'listar_professor.html', {'professores':professores})
 
 @has_permission_decorator('cadastrar_funcionario')
 def excluir_usuario(request, id):
