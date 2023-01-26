@@ -100,6 +100,11 @@ def logout(request):
     request.session.flush()
     return redirect(reverse(login))
 
+@has_permission_decorator('listagem')
+def listagem(request):
+    usuarios = Users.objects.filter().order_by('first_name')
+    return render(request, 'listagem.html', {'usuarios':usuarios})
+
 @has_permission_decorator('listagem_funcionario')
 def listagem_funcionario(request):
     funcionarios = Users.objects.filter(cargo="Funcionario").order_by('first_name')

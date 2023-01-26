@@ -17,7 +17,7 @@
 
     <title> {% block 'title' %}{% endblock %} </title>
   </head>
-  <body class="fundo">
+  <body>
     <!--<nav class="navbar navbar-expand-lg navbar-dark bg-nav">
       <a class="navbar-brand" href="#">Academy Combat</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,7 @@
         </ul>
       </div>
     </nav>-->
-    <body id="body-pd">
+    <!--<body id="body-pd">
       <style>
         a {
           text-decoration: none;
@@ -69,64 +69,89 @@
               </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
           </nav>
       </div>
-      <!--Container Main start-->
       <div class="height-100 bg-light">
+      </div>-->
+
+    <body id="body-pd">
+      <style>
+        a {
+          text-decoration: none;
+        }
+      </style>
+      <header class="header" id="header">
+          <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+      </header>
+      <div class="l-navbar" id="nav-bar">
+          <nav class="nav">
+              <div> 
+                  <a style="text-decoration: none;" href="{% url 'home' %}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Academy Combat</span> </a>
+                  <div class="nav_list">
+                    <a style="text-decoration: none;" href="{% url 'home' %}" class="nav_link active"> <i class='bx bx bx-home nav_icon'></i> <span class="nav_name">Home</span> </a>
+                    <a href="{% url 'listagem' %}" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a> 
+                    <a href="#" class="nav_link"> <i class='bx bxs-face nav_icon'></i> <span class="nav_name">Aluno</span> </a>
+                    <a href="#" class="nav_link"> <i class='bx bxs-credit-card nav_icon'></i> <span class="nav_name">Mensalidade</span> </a>
+                    <a href="#" class="nav_link"> <i class='bx bx-calendar-check nav_icon'></i> <span class="nav_name">Presença</span> </a> 
+                    <a href="#" class="nav_link"></a> </div>
+              </div> 
+              <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">LogOut</span> </a>
+          </nav>
       </div>
-  
+      
 
-    {% block 'body' %}
-
-    <div class="container" style="height: 10em; position: relative; margin: 0; position: absolute; top: 40%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%);">
-      <div class="row gutters-sm">
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex flex-column align-items-center text-center">
-                <img src="{% static 'usuarios/img/perfilsite3.png' %}" alt="Admin" class="rounded-circle" width="150">
-                <div class="mt-3">
-                  <h4 class="text-secondary mb-1">{{ request.user.first_name }}</h4>
-                  <p class="text-muted font-size-sm">{{ request.user.cargo }}</p>
+    <section>
+      
+      {% block 'body' %}
+      <div class="container" style="height: 10em; position: relative; margin: 0; position: absolute; top: 40%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%); margin-top: 20%">
+        <div class="row gutters-sm">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img src="{% static 'usuarios/img/perfilsite3.png' %}" alt="Admin" class="rounded-circle" width="150">
+                  <div class="mt-3">
+                    <h4 class="text-secondary mb-1">{{ request.user.first_name }}</h4>
+                    <p class="text-muted font-size-sm">{{ request.user.cargo }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="text-secondary mb-1">Username</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ request.user.first_name }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="text-secondary mb-1">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ request.user.email }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="text-secondary mb-1">Endereco</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{ request.user.endereco_usuario }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-8">
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="text-secondary mb-1">Username</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  {{ request.user.first_name }}
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="text-secondary mb-1">Email</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  {{ request.user.email }}
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="text-secondary mb-1">Endereco</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  {{ request.user.endereco_usuario }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-
-    {% endblock %}
+      {% endblock %}
+    </section>
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
