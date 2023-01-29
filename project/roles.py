@@ -6,14 +6,19 @@ class Gerente(AbstractUserRole):
         'cadastrar_professor': True,
         'listagem_funcionario': True,
         'listagem_professor': True,
+        'cadastrar_aluno': True,
+        'listagem_aluno': True,
+        'listagem': True,
     }
 
 class Funcionario(AbstractUserRole):
     available_permissions = {
-        'cadastrar_aluno': True
+        'cadastrar_aluno': True,
+        'listagem_aluno': True,
     }
 
 class Professor(AbstractUserRole):
     available_permissions = {
-        'registro_de_presenca': True
+        'registrar_presenca': True,
+        'listagem_aluno': True,
     }
