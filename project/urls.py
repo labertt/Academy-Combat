@@ -7,4 +7,5 @@ urlpatterns = [
     path('auth/', include('usuarios.urls')),
     path('aluno/', include('aluno.urls')),
     path('mensalidade/', include('mensalidade.urls')),
+    path('presenca/', include('presenca.urls')),
 ]

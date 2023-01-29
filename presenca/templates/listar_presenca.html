@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+<title> {% block 'title' %}Presença{% endblock %} </title>
+
+{% block 'body' %}
+
+    <div class="row" style="margin-top: 100px;">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Listagem Presença</h1>
+            </div>
+            <div style="text-align: right;" class="col-md-6">
+                <button  class="btn btn-primary"><a style="text-decoration: none; color: white;" href="{% url 'cadastrar_presenca' %}">Adicionar Presença</a></button>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-striped table-dark" style="margin-top: 5%;">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome do Aluno</th>
+                        <th scope="col">Data da Presença</th>
+                        <th scope="col">Presente</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    
+                    
+                    <tr>
+                        <td>Lara Simone Rodrigues</th>
+                        <td>07/05/2022</td>
+                        <td>Sim</td>
+                    </tr>
+                    <tr>
+                        <td>Murilo Elias Moraes</th>
+                        <td>09/12/2022</td>
+                        <td>Não</td>
+                    </tr>
+                    <tr>
+                        <td>Mário Victor Yago Peixoto</th>
+                        <td>12/01/2023</td>
+                        <td>Sim</td>
+                    </tr>
+                    
+                    
+    
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

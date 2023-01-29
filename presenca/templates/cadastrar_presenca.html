@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+<title> {% block 'title' %}Cadastro de Presença{% endblock %} </title>
+
+{% block 'body' %}
+
+    <div class="container">
+        {% if messages %}
+        
+            <br class="bg-br">
+            {% for message in messages %}
+            
+                <div class="alert {{message.tags}}">{{message}}</div>
+            
+            {% endfor %}
+        
+        {% endif %}
+        <form class="row" action="{% url 'cadastrar_mensalidade' %}" method="POST" style="margin-top: 7%;">{% csrf_token %}
+
+            <h1>Presença</h1>
+            <div class="mt-3 col-md-12">
+                <label class="text-dark" for="">Nome do Aluno</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected disabled value="">Selecione</option>
+                    <option name="turno_aluno"></option>
+                    <option name="turno_aluno"></option>
+                    <option name="turno_aluno"></option>
+                </select>
+            </div>
+            <br>
+            <div class="mt-3 col-md-6">
+                <label class="text-dark" for="">Data da Presença</label>
+                <input type="date" placeholder="Digite sua data" name="cpf_aluno" class="form-control">
+            </div>
+            <br>
+            <div class="mt-3 col-md-6">
+                <label class="text-dark" for="">Presente: </label>
+                <input type="checkbox" id="tecnologia1" name="tecnologia1" value="SIM">
+                <label for="tecnologia1">Sim</label>
+                <input type="checkbox" id="tecnologia1" name="tecnologia1" value="SIM">
+                <label for="tecnologia1">Não</label>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-success" style="width: 100%; margin-top: 4%;">
+
+        </form>
+
+        <hr class="bg-hr">
+
+    </div>
+
+{% endblock %}
